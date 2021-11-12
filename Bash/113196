@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function have_been() {
+	
+	echo "Your email pls:  "
+	read -s email
+	echo "¿Agregar correo? 1.Si 2.No"
+	read opc
+	while [[ $opc == "1" ]]
+	do
+		echo "Your email pls:  "
+		read -s email
+		echo "¿Agregar correo? 1.Si 2.No"
+		read opc
+	done
+	if [[ $opc == "2" ]]
+	then
+		echo "Api key pls: "
+		read -s ak
+	fi
+	curl -o infocuentas.txt "https://haveibeenpwned.com/api/v3/breachedaccount/$email" -H "hibp-api-key:$ak"
+	curl -o hola.txt "https://haveibeenpwned.com/api/v3/pasteaccount/$email" -H "hibp-api-key:$ak"
+}
+
+have_been
+
